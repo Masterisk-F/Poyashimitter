@@ -10,7 +10,11 @@ import twitter4j.URLEntity;
 import twitter4j.UserMentionEntity;
 
 public class StringFormatter {
-	
+	/*リプライ・ハッシュタグの後ろで切れ目になる文字*/
+	static String gap="("
+			//+ "|^(\\w|_|[\\_]|[А-Я]|[а-я]|[\u3041-\u3096]|[\u30A1-\u30FA]|[々〇〻\u3400-\u9FFF]|[\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])"
+			+"[^\\w_\\_А-Яа-я\\u3041-\\u3096\\u30A1-\\u30FA々〇〻\\u3400-\\u9FFF\\uF900-\\uFAFF\\uD840-\\uD87F\\uDC00-\\uDFFF]"
+			+ "|$)";
 	public static String getDisplayHTMLString(Status status){
 		String text=status.getText();
 		text="<html><body>"
@@ -26,11 +30,6 @@ public class StringFormatter {
 		list.addAll(Arrays.asList(status.getExtendedMediaEntities()));
 		for(URLEntity url : list){
 			String dispUrl=url.getDisplayURL();
-			/*
-			dispUrl=dispUrl.substring(0,Math.min(dispUrl.length(),22));
-			if(dispUrl.length()==22)
-				dispUrl+="..";
-			*/
 			text=text.replaceAll(url.getURL(),
 					"<a href=\""+url.getExpandedURL()+"\">"+dispUrl+"</a>");//どのURLを表示させるかは要検討
 			
@@ -38,7 +37,7 @@ public class StringFormatter {
 		}
 		
 		for(UserMentionEntity user:status.getUserMentionEntities()){
-			text=text.replaceAll("@"+user.getScreenName(),
+			text=text.replaceAll("@"+user.getScreenName()+"(?="+gap+")",
 					"<a href=\"poyash://user/"+user.getId()+"."+user.getScreenName()+"\">"
 					+"@"+user.getScreenName()+"</a>");
 			//System.out.println(user.getName()+"\n"+user.getScreenName());
@@ -46,14 +45,14 @@ public class StringFormatter {
 		}
 		
 		for(HashtagEntity hash:status.getHashtagEntities()){
-			text=text.replaceAll("(^|\\s)"+"#"+hash.getText()+"(\\s|$)",
+			text=text.replaceAll("[#＃]"+hash.getText()+"(?="+gap+")",
 					"\n<a href=\"poyash://hashtag/"+hash.getText()+"\">"
 					+"#"+hash.getText()+"</a>\n");
 			
-			//System.out.println(text+"\n"+"#"+hash.getText()+"\n");
+			System.out.println(text+"\n"+"#"+hash.getText()+"\n");
 		}
 		
-		
+		//System.out.println(text);
 		return text;
 	}
 	/*
