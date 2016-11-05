@@ -202,7 +202,7 @@ class MediaMainPanel extends JComponent{
 						ratio=1;
 						offset.setLocation(0,0);
 						scaling();
-						System.out.println("getPicture");
+						//System.out.println("getPicture");
 						repaint();
 					}
 				}

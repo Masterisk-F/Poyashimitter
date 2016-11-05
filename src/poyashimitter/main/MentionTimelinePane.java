@@ -12,6 +12,11 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.UserMentionEntity;
 
+/*自分のtweetがRTされるとここに表示される
+おそらくリスナーのcontainUserに問題あり
+
+*/
+
 public class MentionTimelinePane extends AbstractTimelineScrollPane {
 	Twitter twitter;
 	TwitterStream twitterStream;

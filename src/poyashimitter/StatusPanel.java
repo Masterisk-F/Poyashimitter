@@ -608,8 +608,7 @@ public class StatusPanel extends JPanel{
 	}
 	
 	private JEditorPane getTextPane(){
-		JEditorPane text;//ツイート本文
-		text=new JEditorPane();
+		final JEditorPane text=new JEditorPane();//ツイート本文
 		text.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,12));
 		text.putClientProperty(JTextPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
 		text.setContentType("text/html");

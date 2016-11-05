@@ -49,7 +49,7 @@ public class StringFormatter {
 					"\n<a href=\"poyash://hashtag/"+hash.getText()+"\">"
 					+"#"+hash.getText()+"</a>\n");
 			
-			System.out.println(text+"\n"+"#"+hash.getText()+"\n");
+			//System.out.println(text+"\n"+"#"+hash.getText()+"\n");
 		}
 		
 		//System.out.println(text);

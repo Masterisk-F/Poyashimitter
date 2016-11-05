@@ -500,7 +500,7 @@ public class Settings {
 			array[0]=new TabDescriptor(TabDescriptor.home,null);
 			array[1]=new TabDescriptor(TabDescriptor.reply,null);
 			array[2]=new TabDescriptor(TabDescriptor.search,"");
-			setTab(array);
+			setTabs(array);
 			return 3;
 		}
 		return Integer.decode(s);
@@ -512,7 +512,7 @@ public class Settings {
 			return null;
 		return new TabDescriptor(s);
 	}
-	public static boolean setTab(TabDescriptor[] desc){
+	public static boolean setTabs(TabDescriptor[] desc){
 		if(desc==null)
 			return false;
 		
